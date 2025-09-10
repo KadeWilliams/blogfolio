@@ -83,6 +83,19 @@ const { selectedItem } = Astro.props;
         />
         <div>About</div>
       </a>
+      <a
+        href="/favorite-links"
+        class={`nav-link-container w-inline-block ${
+          selectedItem === 'home' ? 'w--current' : ''
+        }`}>
+        <img
+          src="/assets/home.svg"
+          loading="eager"
+          alt=""
+          class="nav-link-image"
+        />
+        <div>Favorite Links</div>
+      </a>
     </nav>
 
     <div
