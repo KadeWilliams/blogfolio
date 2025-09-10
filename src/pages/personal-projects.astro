@@ -4,29 +4,13 @@ import Project from '../components/Project.astro';
 import Sidebar from '../components/Sidebar.astro';
 const projects = [
   {
-    title: "TeleJS",
+    title: "Algorithm Visualizer",
     desc: [
-      "Built a lightweight, open-source Slack API framework for efficient bot development",
-      "Developed in Node.js and published as an NPM package"
+      "",
     ],
-    tech: ["Node.js", "NPM"]
+    tech: ["Node.js", "NPM"],
+    link: "/"
   },
-  {
-    title: "pyPrompter",
-    desc: [
-      "Contributed to a popular open-source Python pip package for building interactive CLIs",
-      "Developed a feature that lets you 'freeze' inquirer choices"
-    ],
-    tech: ["Python"]
-  },
-  {
-    title: "WebAssetHub",
-    desc: [
-      "Created a web scraper tool that monitors digital assets across multiple platforms and offers them at competitive prices",
-      "Sold over 700 items"
-    ],
-    tech: ["Python", "Selenium"]
-  }
 ];
 ---
 <!DOCTYPE html>
@@ -52,6 +36,7 @@ const projects = [
                         title={project.title} 
                         desc={project.desc}
                         tech={project.tech}
+                        link={project.link}
                       />
                     ))}
                   </div>

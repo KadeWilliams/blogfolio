@@ -21,7 +21,7 @@ const { selectedItem } = Astro.props;
           class="niv-image"
         />
         <div>
-          <div class="label-white">Sam Bernstein</div>
+          <div class="label-white">Kade Williams</div>
           <div class="label-gray">Software Engineer</div>
         </div>
       </div>
@@ -32,8 +32,7 @@ const { selectedItem } = Astro.props;
         href="/"
         class={`nav-link-container w-inline-block ${
           selectedItem === 'home' ? 'w--current' : ''
-        }`}
-      >
+        }`}>
         <img
           src="/assets/home.svg"
           loading="eager"
@@ -49,8 +48,7 @@ const { selectedItem } = Astro.props;
         }`}
         aria-current={
           selectedItem === 'software-development' ? 'page' : undefined
-        }
-      >
+        }>
         <img
           src="/assets/code.svg"
           loading="eager"
@@ -63,8 +61,7 @@ const { selectedItem } = Astro.props;
         href="/personal-projects"
         class={`nav-link-container w-inline-block ${
           selectedItem === 'personal-projects' ? 'w--current' : ''
-        }`}
-      >
+        }`}>
         <img
           src="/assets/favorite.svg"
           loading="eager"
@@ -72,6 +69,19 @@ const { selectedItem } = Astro.props;
           class="nav-link-image"
         />
         <div>Personal projects</div>
+      </a>
+      <a
+        href="/about"
+        class={`nav-link-container w-inline-block ${
+          selectedItem === 'home' ? 'w--current' : ''
+        }`}>
+        <img
+          src="/assets/home.svg"
+          loading="eager"
+          alt=""
+          class="nav-link-image"
+        />
+        <div>About</div>
       </a>
     </nav>
 
