@@ -19,7 +19,11 @@ section {
 
 a {
   background-color: rgba(0, 0, 0, 0);
+  text-decoration: none;
+  color: white;
 }
+
+
 
 a:active,
 a:hover {
@@ -318,15 +322,15 @@ p {
 .niv-image {
   width: 48px;
   height: 48px;
-  border: 1px solid #353535;
-  border-radius: 100px;
+  /* border: 1px solid #353535; */
+  /* border-radius: 100px; */
   margin-right: 12px;
 }
 
 .main {
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(rgba(28, 28, 28, 0.64), rgba(28, 28, 28, 0.64)), url('./grid-top-right.svg'), linear-gradient(rgba(28, 28, 28, 0.24), rgba(28, 28, 28, 0.24));
+  background-image: linear-gradient(rgba(16, 16, 16, 0.50), rgba(47, 14, 64, 0.64)), url('./grid-top-right.svg'), linear-gradient(rgba(28, 28, 28, 0.24), rgba(28, 28, 28, 0.24));
   background-position: 0 0, 0 0, 0 0;
   background-size: auto, auto 1130px, auto;
   flex-direction: column;
@@ -429,7 +433,7 @@ p {
 .items-container {
   display: flex;
   flex-direction: row;
-  color: purple;
+  color: #a8a8a8;
 }
 
 .nav-link-image {

@@ -15,7 +15,7 @@ const { selectedItem } = Astro.props;
     <a href="/" class="w-nav-brand" aria-label="home">
       <div class="niv-data">
         <img
-          src="/assets/sam.jpg"
+          src="/assets/KW-white.png"
           loading="eager"
           alt="Profile picture"
           class="niv-image"
@@ -41,8 +41,7 @@ const { selectedItem } = Astro.props;
         />
         <div>Home</div>
       </a>
-      <a
-        href="/software-development"
+      <a href="/software-development"
         class={`nav-link-container w-inline-block ${
           selectedItem === 'software-development' ? 'w--current' : ''
         }`}
@@ -70,13 +69,12 @@ const { selectedItem } = Astro.props;
         />
         <div>Personal projects</div>
       </a>
-      <a
+      <!-- <a
         href="/about"
         class={`nav-link-container w-inline-block ${
-          selectedItem === 'home' ? 'w--current' : ''
+          selectedItem === 'about' ? 'w--current' : ''
         }`}>
         <img
-          src="/assets/home.svg"
           loading="eager"
           alt=""
           class="nav-link-image"
@@ -86,16 +84,15 @@ const { selectedItem } = Astro.props;
       <a
         href="/favorite-links"
         class={`nav-link-container w-inline-block ${
-          selectedItem === 'home' ? 'w--current' : ''
+          selectedItem === 'favorite-links' ? 'w--current' : ''
         }`}>
         <img
-          src="/assets/home.svg"
           loading="eager"
           alt=""
           class="nav-link-image"
         />
         <div>Favorite Links</div>
-      </a>
+      </a> -->
     </nav>
 
     <div

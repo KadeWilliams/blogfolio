@@ -6,10 +6,18 @@ const projects = [
   {
     title: "Algorithm Visualizer",
     desc: [
-      "",
     ],
-    tech: ["Node.js", "NPM"],
-    link: "/"
+    tech: ["C#", ".NET", "React"],
+    link: "/",
+    github: "https://github.com/KadeWilliams/algo-visualizer"
+  },
+  {
+    title: "ProcrastiPlate",
+    desc: [
+    ],
+    tech: ["C#", ".NET", "Postgres", "Docker"],
+    link: "/",
+    github: "https://github.com/KadeWilliams/ProcrastiPlate"
   },
 ];
 ---
@@ -37,6 +45,7 @@ const projects = [
                         desc={project.desc}
                         tech={project.tech}
                         link={project.link}
+                        github={project.github}
                       />
                     ))}
                   </div>
