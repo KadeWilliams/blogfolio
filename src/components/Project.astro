@@ -1,0 +1,43 @@
+---
+const { title, desc, problem, solution, header, link, tech, github} = Astro.props;
+---
+
+<div class="single-item">
+  <div id="project-links">
+    <a href={link}><h3>{title}</h3></a>
+    { github ? <a href={github}>GitHub</a> : ""}
+  </div>
+  <div>
+    { problem != null ? (<p><em><strong>Problem:</strong></em> {problem}</p>) : ""}
+    { solution != null ? (<p><em><strong>Solution:</strong></em> {solution}</p>) : ""}
+    <h5>{header}</h5>
+    <ul role="list">
+      {desc.length > 0 ? desc.map(item => <li>{item}</li>) : ""}
+    </ul>
+    <div class="chips-container">
+      {tech ? tech.map(techItem => <div class="single-chip">{techItem}</div>) : ""}
+    </div>
+  </div>
+</div>
+<style>
+  #project-links {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+  }
+</style>
+<!--
+<div class="single-item">
+  <h3>{title}</h3>
+  <div class="project-desc project-desc-list w-richtext">
+    <ul role="list">
+      {desc.map(item => <li>{item}</li>)}
+    </ul>
+  </div>
+  <div class="mini-label-white">Technologies &amp; tools</div>
+  <div class="chips-container">
+    {tech.map(techItem => <div class="single-chip">{techItem}</div>)}
+  </div>
+</div>
+-->
