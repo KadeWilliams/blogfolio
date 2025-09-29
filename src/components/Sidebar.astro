@@ -9,7 +9,7 @@ const { selectedItem } = Astro.props;
   data-easing="ease"
   data-easing2="ease"
   role="banner"
-  class="sidebar w-nav"
+  class="sidebar breathing-color w-nav"
 >
   <div class="nav-content">
     <a href="/" class="w-nav-brand" aria-label="home">
@@ -125,3 +125,24 @@ const { selectedItem } = Astro.props;
     });
   </script>
 </aside>
+<style>
+
+  .sidebar {
+    animation: breathing-color 5s ease-in-out infinite alternate;
+  }
+
+  @keyframes breathing-color {
+    0% {
+      background-color: rgb(255, 205, 205); /* Starting color */
+    }
+    33% {
+      background-color: rgb(205, 255, 205); /* Starting color */
+    }
+    66% {
+      background-color: rgb(205, 205, 255); /* Middle color */
+    }
+    100% {
+      background-color: rgb(255, 205, 205); /* Starting color */
+    }
+  }
+</style>
