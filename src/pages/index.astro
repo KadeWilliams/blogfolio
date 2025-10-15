@@ -1,5 +1,6 @@
 ---
 import Header from "../components/Header.astro";
+import Navbar from "../components/Navbar.astro";
 import Sidebar from "../components/Sidebar.astro";
 ---
 
@@ -10,21 +11,19 @@ import Sidebar from "../components/Sidebar.astro";
   <Header title="Kade Williams" />
   <body>
     <div class="content">
-      <Sidebar selectedItem="home" />
-      <nav class="main">
+    <Navbar>
+    <nav class="main">
         <div class="container">
           <main class="fold-content-container">
             <div class="fold-content">
               <h1>Hi, I'm Kade!<br />Thanks for stopping by!</h1>
-              <p class="lead"> 
+              <!-- <p class="lead"> 
                 An experienced senior .NET full-stack and database developer specializing in building robust, internal business applications that automate critical processes and provide actionable insights across large-scale data environments.
                 Deep Expertise in the .NET ecosystem (C#, .NET, SQL Server) to solve complex operational challenges with a database focus.
-              </p>
+              </p> -->
             </div>
-            <a href="mailto:kadewilliams0@gmail.com	" class="button w-button">Contact</a>
           </main>
-          <div class="projects-section">
-            <!-- Software Development -->
+          <!-- <div class="projects-section">
             <a href="/software-development" class="projects-container">
               <div class="single-projects-category">
                 <div class="projects-category-image-container">
@@ -46,7 +45,6 @@ import Sidebar from "../components/Sidebar.astro";
                 </div>
               </div>
             </a>
-            <!-- Personal Projects -->
             <a href="/personal-projects" class="projects-container">
               <div class="single-projects-category">
                 <div class="projects-category-image-container devops-img">
@@ -71,12 +69,71 @@ import Sidebar from "../components/Sidebar.astro";
                 </div>
               </div>
             </a>
-          </div>
+          </div> -->
 
         </div>
       </nav>
     </div>
-
-    <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+    </Navbar>
   </body>
 </html>
+
+<style>
+  * {
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+  }
+  .tech-tools-container {
+    flex-direction: column;
+    justify-content: flex-end;
+    display: flex;
+  }
+
+  .chips-container {
+    grid-column-gap: 12px;
+    grid-row-gap: 12px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-top: 8px;
+    display: flex;
+  }
+
+  .chips-container.chips-container-small-width {
+    max-width: 380px;
+  }
+
+  .single-chip {
+    color: #e5e5dd;
+    background-color: #010101;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-family: IBM Plex Mono, sans-serif;
+  }
+
+  .single-chip.small-chip {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  .fold-content-container {
+    display: grid;
+    grid-template: repeat(5, 1fr)/repeat(4, 1fr);
+  }
+  
+  .fold-content {
+    grid-column: 3;
+    grid-row: 2;
+  }
+
+  .main {
+    height: 100%;
+  }
+  
+  .nav-link-container.w--current {
+    color: #fff;
+    background-color: #2b2b2b;
+    border-color: #353535;
+  }
+</style>
