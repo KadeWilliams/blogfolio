@@ -1,0 +1,212 @@
+---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+    const posts = await getCollection('blog', ({ data }) => {
+        return data.draft !== true;
+    });
+
+    return posts.map(post => ({
+        params: { slug: post.slug }, 
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={post.data.description} />
+    <title>{post.data.title}</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+      }
+      
+      .back-link {
+        display: inline-block;
+        margin-bottom: 2rem;
+        color: #666;
+        text-decoration: none;
+      }
+      
+      .back-link:hover {
+        color: #333;
+      }
+      
+      article {
+        margin-top: 2rem;
+      }
+      
+      header {
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+      }
+      
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        color: #666;
+        font-size: 0.95rem;
+      }
+      
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+      }
+      
+      .tag {
+        padding: 0.3rem 0.8rem;
+        background: #f0f0f0;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        text-decoration: none;
+        color: #666;
+        transition: all 0.2s;
+      }
+      
+      .tag:hover {
+        background: #333;
+        color: white;
+      }
+      
+      .cover-image {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 2rem 0;
+      }
+      
+      .content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+      }
+      
+      .content h2 {
+        font-size: 1.8rem;
+        margin: 2rem 0 1rem;
+      }
+      
+      .content h3 {
+        font-size: 1.4rem;
+        margin: 1.5rem 0 0.8rem;
+      }
+      
+      .content p {
+        margin: 1rem 0;
+      }
+      
+      .content ul, .content ol {
+        margin: 1rem 0;
+        padding-left: 2rem;
+      }
+      
+      .content li {
+        margin: 0.5rem 0;
+      }
+      
+      .content a {
+        color: #0066cc;
+        text-decoration: none;
+        border-bottom: 1px solid #0066cc;
+      }
+      
+      .content a:hover {
+        border-bottom: 2px solid #0066cc;
+      }
+      
+      .content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 2rem 0;
+      }
+      
+      .content blockquote {
+        border-left: 4px solid #e0e0e0;
+        padding-left: 1.5rem;
+        margin: 1.5rem 0;
+        color: #666;
+        font-style: italic;
+      }
+      
+      .content code {
+        background: #f5f5f5;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9em;
+      }
+      
+      .content pre {
+        background: #f5f5f5;
+        padding: 1rem;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 1.5rem 0;
+      }
+      
+      .content pre code {
+        background: none;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="/blog" class="back-link">← Back to blog</a>
+    
+    <article>
+      <header>
+        <h1>{post.data.title}</h1>
+        <div class="meta">
+          <time>
+            {post.data.date.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
+          </time>
+        </div>
+        <div class="tags">
+          {post.data.tags.map(tag => (
+            <a href={`/blog?tag=${tag}`} class="tag">
+              {tag}
+            </a>
+          ))}
+        </div>
+      </header>
+
+      {post.data.image && (
+        <img src={post.data.image} alt={post.data.title} class="cover-image" />
+      )}
+
+      <div class="content">
+        <Content />
+      </div>
+    </article>
+  </body>
+</html>
