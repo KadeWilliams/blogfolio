@@ -1,52 +1,82 @@
 ---
 interface Props {
-	title: string;
+  title: string;
+  description?: string;
 }
-
-const { title } = Astro.props;
+const { title, description = "Kade Williams — Senior .NET Full-Stack & Database Engineer" } = Astro.props;
 ---
-
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="twitter:title" content={title} />
+    <link rel="icon" href="/assets/KW.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&family=VT323&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
+
 <style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: purple;
-		background-size: 224px;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
+  :root {
+    --bg:        #080808;
+    --bg-2:      #111111;
+    --bg-3:      #1a1a1a;
+    --white:     #e8e4dc;
+    --dim:       rgba(232, 228, 220, 0.45);
+    --blue:      #00CFFF;
+    --red:       #FF2A2A;
+    --green:     #00FF41;
+    --border-color: rgba(232, 228, 220, 0.15);
+    --border:    1px solid var(--border-color);
+    --border-2:  2px solid var(--border-color);
+    --border-accent: 2px solid var(--blue);
+    --shadow:    4px 4px 0px var(--blue);
+    --shadow-sm: 3px 3px 0px var(--blue);
+    --font-display: 'Archivo Black', sans-serif;
+    --font-mono:    'IBM Plex Mono', monospace;
+    --font-vt:      'VT323', monospace;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--bg);
+    color: var(--white);
+    font-family: var(--font-mono);
+    min-height: 100vh;
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.012) 2px,
+      rgba(255,255,255,0.012) 4px
+    );
+  }
+
+  a { color: var(--white); text-decoration: none; }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+  p { line-height: 1.7; font-size: 0.875rem; }
+
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--bg-3); border-left: 2px solid var(--border-color); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--blue); }
 </style>

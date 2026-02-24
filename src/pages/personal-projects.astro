@@ -1,60 +1,407 @@
 ---
-import Header from '../components/Header.astro';
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
 import Project from '../components/Project.astro';
-import Sidebar from '../components/Sidebar.astro';
-const projects = [
+
+const featuredProject = {
+  title: "Recipe Collection",
+  featuredDesc: "A full-stack recipe management app built from scratch — a personal exploration of end-to-end product development across the entire modern web stack.",
+  stack: {
+    frontend: ["React", "JavaScript", "Vercel"],
+    backend:  [".NET Minimal API", "C#"],
+    data:     ["PostgreSQL", "Railway"],
+  },
+  highlights: [
+    "Designed and built a RESTful .NET Minimal API backend with full CRUD operations and clean endpoint architecture.",
+    "Implemented a React frontend with dynamic flip-card recipe browsing, multi-tab edit forms, and responsive layout.",
+    "Deployed a split infrastructure: frontend on Vercel, .NET API + PostgreSQL on Railway — production-grade from day one.",
+    "Sole developer across every layer: database schema, API design, UI/UX, and deployment pipeline.",
+  ],
+  liveUrl: "https://recipe-collection-six.vercel.app/",
+  github: "https://github.com/KadeWilliams/recipecollection",
+};
+
+const otherProjects = [
   {
     title: "Algorithm Visualizer",
     desc: [
+      "An interactive visualizer for common sorting and pathfinding algorithms.",
+      "Built to deepen understanding of algorithmic complexity through real-time animation.",
     ],
     tech: ["C#", ".NET", "React"],
-    link: "/",
-    github: "https://github.com/KadeWilliams/algo-visualizer"
+    github: "https://github.com/KadeWilliams/algo-visualizer",
   },
   {
     title: "ProcrastiPlate",
     desc: [
+      "A meal planning app designed to reduce decision fatigue around cooking.",
     ],
-    tech: ["C#", ".NET", "Postgres", "Docker"],
-    link: "/",
-    github: "https://github.com/KadeWilliams/ProcrastiPlate"
+    tech: ["C#", ".NET", "PostgreSQL", "Docker"],
+    github: "https://github.com/KadeWilliams/ProcrastiPlate",
   },
 ];
 ---
-<!DOCTYPE html>
-<html>
-  <Header title="Personal Projects | Kade Williams" />
-  <body>
-    <div class="content">
-        <Sidebar selectedItem="personal-projects" />
-      <nav class="main">
-        <div class="container">
-          <div class="back-nav-container">
-            <a href="/" class="back-nav-button w-inline-block"
-              ><img src="/assets/back.svg" loading="lazy" alt="" class="back-nav-img" />
-              <div>Back</div></a
-            >
-          </div>
-          <div class="content-container">
-            <h1>Personal Projects</h1>
-            <section class="items-container">
-                <div class="resource-items">
-                    {projects.map(project => (
-                      <Project 
-                        title={project.title} 
-                        desc={project.desc}
-                        tech={project.tech}
-                        link={project.link}
-                        github={project.github}
-                      />
-                    ))}
-                  </div>
-            </section>
-          </div>
-        </div>
-      </nav>
+
+<Layout title="Personal Projects | Kade Williams">
+  <Nav current="personal-projects" />
+
+  <main class="page-wrapper">
+
+    <div class="page-header">
+      <a href="/" class="back-link">← BACK</a>
+      <div class="page-eyebrow font-vt">// PERSONAL PROJECTS</div>
+      <h1 class="page-title">THINGS<br /><span class="outline">I'VE BUILT</span></h1>
+      <p class="page-desc">
+        Side projects where I set the constraints, make the architecture decisions,
+        and own every layer of the stack.
+      </p>
     </div>
 
-    <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
-  </body>
-</html>
+    <section class="featured-section">
+      <div class="section-label font-vt">◈ FEATURED</div>
+
+      <article class="featured-card">
+        <div class="fc-header">
+          <div class="fc-badge font-vt">★ FLAGSHIP PROJECT</div>
+          <div class="fc-links">
+            <a href={featuredProject.liveUrl} target="_blank" rel="noopener" class="fc-link fc-link--live">
+              LIVE DEMO ↗
+            </a>
+            <a href={featuredProject.github} target="_blank" rel="noopener" class="fc-link">
+              GITHUB ↗
+            </a>
+          </div>
+        </div>
+
+        <h2 class="fc-title">{featuredProject.title}</h2>
+        <p class="fc-desc">{featuredProject.featuredDesc}</p>
+
+        <div class="fc-stack">
+          <div class="fc-stack-col">
+            <div class="stack-section-label font-vt">FRONTEND//</div>
+            <div class="stack-chips">
+              {featuredProject.stack.frontend.map(t => <span class="chip chip--blue">{t}</span>)}
+            </div>
+          </div>
+          <div class="fc-stack-divider"></div>
+          <div class="fc-stack-col">
+            <div class="stack-section-label font-vt">BACKEND//</div>
+            <div class="stack-chips">
+              {featuredProject.stack.backend.map(t => <span class="chip chip--blue">{t}</span>)}
+            </div>
+          </div>
+          <div class="fc-stack-divider"></div>
+          <div class="fc-stack-col">
+            <div class="stack-section-label font-vt">DATA + INFRA//</div>
+            <div class="stack-chips">
+              {featuredProject.stack.data.map(t => <span class="chip chip--blue">{t}</span>)}
+            </div>
+          </div>
+        </div>
+
+        <div class="fc-highlights">
+          <div class="highlights-label font-vt">KEY HIGHLIGHTS//</div>
+          <ul class="highlights-list">
+            {featuredProject.highlights.map(h => (
+              <li>
+                <span class="hl-bullet">▸</span>
+                <span>{h}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <section class="other-section">
+      <div class="section-label font-vt">◈ OTHER PROJECTS</div>
+      <div class="projects-grid">
+        {otherProjects.map(p => (
+          <Project
+            title={p.title}
+            desc={p.desc}
+            tech={p.tech}
+            github={p.github}
+          />
+        ))}
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="font-vt footer-copy">KW © {new Date().getFullYear()}</span>
+      <div class="footer-links">
+        <a href="https://github.com/KadeWilliams" target="_blank" rel="noopener" class="footer-link">GITHUB ↗</a>
+        <a href="mailto:kadewilliams0@gmail.com" class="footer-link">EMAIL ↗</a>
+      </div>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  .page-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 2rem 3rem;
+  }
+
+  .font-vt { font-family: var(--font-vt) !important; }
+
+  .page-header {
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--dim);
+    margin-bottom: 1.5rem;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.15s;
+  }
+
+  .back-link:hover { color: var(--blue); border-color: var(--blue); }
+
+  .page-eyebrow {
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    color: var(--blue);
+    margin-bottom: 0.5rem;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.9;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+  }
+
+  .outline {
+    -webkit-text-stroke: 2px var(--white);
+    color: transparent;
+  }
+
+  .page-desc { color: var(--dim); max-width: 520px; }
+
+  .section-label {
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    color: var(--dim);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-color);
+  }
+
+  .featured-section { margin-bottom: 4rem; animation: fadeUp 0.5s ease both; }
+
+  .featured-card {
+    border: 1px solid rgba(0, 207, 255, 0.4);
+    background: linear-gradient(135deg, var(--bg-2) 0%, rgba(0, 207, 255, 0.04) 100%);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .featured-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--blue);
+  }
+
+  .fc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .fc-badge {
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    background: var(--blue);
+    color: var(--bg);
+    padding: 2px 10px;
+  }
+
+  .fc-links { display: flex; gap: 0.5rem; }
+
+  .fc-link {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--dim);
+    border: 1px solid var(--border-color);
+    padding: 0.35rem 0.75rem;
+    transition: all 0.15s;
+  }
+
+  .fc-link:hover { color: var(--blue); border-color: var(--blue); }
+
+  .fc-link--live {
+    color: var(--blue);
+    border-color: var(--blue);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .fc-link--live:hover {
+    background: var(--blue);
+    color: var(--bg);
+    transform: translate(-1px, -1px);
+  }
+
+  .fc-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+
+  .fc-desc {
+    color: var(--dim);
+    max-width: 680px;
+    margin-bottom: 2rem;
+    border-left: 2px solid var(--blue);
+    padding-left: 1rem;
+    line-height: 1.7;
+  }
+
+  .fc-stack {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--border-color);
+    background: var(--bg-3);
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .fc-stack-col {
+    flex: 1;
+    min-width: 160px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .fc-stack-divider { width: 1px; background: var(--border-color); }
+
+  .stack-section-label {
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    color: var(--blue);
+  }
+
+  .stack-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+  .chip {
+    font-family: var(--font-vt);
+    font-size: 1rem;
+    padding: 2px 8px;
+    border: 1px solid var(--border-color);
+    color: var(--dim);
+    transition: all 0.15s;
+  }
+
+  .chip--blue {
+    border-color: rgba(0, 207, 255, 0.4);
+    color: var(--blue);
+  }
+
+  .fc-highlights { display: flex; flex-direction: column; gap: 0.75rem; }
+
+  .highlights-label {
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    color: var(--dim);
+  }
+
+  .highlights-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .highlights-list li {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--dim);
+    line-height: 1.65;
+  }
+
+  .hl-bullet { color: var(--blue); flex-shrink: 0; margin-top: 2px; }
+
+  .other-section { animation: fadeUp 0.5s 0.15s ease both; }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .footer { border-top: 1px solid var(--border-color); margin-top: 4rem; }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-family: var(--font-vt);
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: var(--dim);
+  }
+
+  .footer-links { display: flex; gap: 1.5rem; }
+
+  .footer-link {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--dim);
+    transition: color 0.15s;
+  }
+
+  .footer-link:hover { color: var(--blue); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 640px) {
+    .fc-stack { flex-direction: column; }
+    .fc-stack-divider { width: auto; height: 1px; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+</style>

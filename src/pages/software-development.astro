@@ -1,122 +1,234 @@
 ---
-import Header from "../components/Header.astro";
-import Project from "../components/Project.astro";
-import Sidebar from "../components/Sidebar.astro";
-const tech = [".NET/C#", "JavaScript", "SQL Server", "PowerShell"]
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Project from '../components/Project.astro';
+
+const tech = [".NET / C#", "JavaScript", "SQL Server", "PowerShell", "Jenkins"];
+
 const projects = [
   {
     title: "DBA Management Portal",
     problem: "DBAs couldn't reliably monitor or control 140+ servers and 800+ TB of data.",
-    solution: "A centralized, web-based, internal management portal providing insights and control to every aspect of the SQL Server ecosystem.",
-    keyDifference: {
-       header: "Scale, Automation, Infrastructure.", 
-       desc: [
-        "Developed an automation engine that leverages PowerShell for reliable, cross-server communication and job execution.",
-        "Delivered a centralized platform that provided the team with more granular control and better visibility than third-party tooling.",
-        "Gained an understanding of the SQL Server architecture and the relationship between Servers, Instances, Databases and Availability Groups."
-      ]
-    },
+    solution: "A centralized, web-based internal management portal providing insights and control across the entire SQL Server ecosystem.",
+    header: "Scale · Automation · Infrastructure",
+    desc: [
+      "Developed an automation engine leveraging PowerShell for reliable, cross-server communication and job execution.",
+      "Delivered a centralized platform giving the team more granular control and better visibility than existing third-party tooling.",
+      "Gained deep understanding of SQL Server architecture across Servers, Instances, Databases, and Availability Groups.",
+    ],
   },
   {
     title: "Ministry Investment App",
-    problem: "The executive team had no efficient way to track donations, partnerships, requests, and contributions, leading to manual errors, lack of visibility and slow processing.",
-    solution: "A secure, reliable, internal application which centralized all financial data.",
-    keyDifference: {
-       header: "Data Sensitivity, Security, Executive Facing.", 
-       desc: [
-        "A full-stack application to replace a legacy process of manual spreadsheets and documents for tracking sensitive financial partnerships and contributions.",
-        "The application provided the executive office with a single source of truth, automating reporting and ensuring data accuracy for critical decision making.",
-        "Key responsibilities included end-to-end development with a focus on implementing robust user authentication using internal tooling, data validation and secure access controls to protect confidential information.",
-      ]
-    },
+    problem: "The executive team had no efficient way to track donations, partnerships, and contributions — leading to manual errors, lack of visibility, and slow processing.",
+    solution: "A secure, reliable internal application centralizing all financial data for the executive office.",
+    header: "Data Sensitivity · Security · Executive-Facing",
+    desc: [
+      "Full-stack application replacing a legacy process of manual spreadsheets for tracking sensitive financial partnerships.",
+      "Provided the executive office with a single source of truth, automating reporting and ensuring data accuracy for critical decisions.",
+      "End-to-end responsibility including robust user authentication, data validation, and secure access controls.",
+    ],
   },
   {
     title: "International Import Price Index (IPI) Processing",
-    problem: "The aging legacy system used by the International group no longer fit the needs and the highly dynamic nature of processing imports, resulting in larger adjustments and corrections than necessary.",
-    solution: "Building out a new all-in-one platform for the entire purchasing, verification and classification processes for increased usability, accuracy and control.",
-    keyDifference: {
-       header: "Modernize, Collaborate, Accuracy", 
-       desc: [
-        "Participated in development of the console, web, and API based applications associated with this process to run jobs against and communicate with other systems to remain in compliance with business objectives.",
-        "Gained a high-level understanding of the entire PO process including correspondence with vendors and as well as the research to be done for tariff classification.",
-      ]
-    },
+    problem: "The aging legacy system no longer fit the highly dynamic nature of processing imports, resulting in larger adjustments and corrections than necessary.",
+    solution: "A new all-in-one platform covering the entire purchasing, verification, and classification process for increased accuracy and control.",
+    header: "Modernize · Collaborate · Accuracy",
+    desc: [
+      "Participated in development across console, web, and API-based applications to run jobs and communicate with external systems.",
+      "Gained high-level understanding of the full PO process — vendor correspondence and tariff classification research.",
+    ],
   },
 ];
-//const projects = [
-//  {
-//    title: "CodeCraft",
-//    desc: [
-//      "Developed a large-scale e-commerce platform for indie game developers",
-//      "Designed and implemented UI, backend, and database architecture",
-//      "Contributed to RESTful API and GraphQL design",
-//      "Led a team of three engineers for several months"
-//    ],
-//    tech: ["React", "Next.js", "Node.js", "MongoDB", "Heroku"]
-//  },
-//  {
-//    title: "CloudMason",
-//    desc: [
-//      "Contributed to microservices architecture design for email distribution system",
-//      "Created a backend infrastructure with queues and an event bus",
-//      "Designed to handle a high volume ~3 million emails per day"
-//    ],
-//    tech: ["Node.js", "RabbitMQ", "Docker", "Kubernetes"]
-//  },
-//  {
-//    title: "Sarah (HealthEase.io)",
-//    desc: [
-//      "Contributed to Israel's largest telehealth platform for doctors and patients",
-//      "Developed appointment and billing systems",
-//      "Resolved live production bugs and server issues"
-//    ],
-//    tech: ["React", "Node.js", "Express.js", "MySQL", "AWS"]
-//  }
-//];
 ---
-<!DOCTYPE html>
-<html>
-  <Header title="Software Development | Kade Williams" />
-  <body>
-    <div class="content">
-        <Sidebar selectedItem="software-development" />
-      <nav class="main">
-        <div class="container">
-          <div class="back-nav-container">
-            <a href="/" class="back-nav-button w-inline-block">
-              <img src="/assets/back.svg" loading="lazy" alt="" class="back-nav-img" />
-              <div>Back</div>
-            </a>
-          </div>
-          <div class="content-container">
-            <h1>Software Development</h1>
-                <div class="mini-label-white">Technologies &amp; tools</div>
-                <div class="chips-container">
-                  {tech.map(techItem => <div class="single-chip">{techItem}</div>)}
-                </div>
-            <section class="items-container">
-                <div class="resource-items">
-                    <!-- {projects.map(project => (
-                      <Project 
-                        title={project.title} 
-                      />
-                    ))} -->
-                    {projects.map(project => (
-                      <Project 
-                        title={project.title}
-                        problem={project.problem}
-                        solution={project.solution}
-                        header={project.keyDifference.header}
-                        desc={project.keyDifference.desc}
-                      />
-                    ))}
-                  </div>
-            </section>
-          </div>
+
+<Layout title="Software Development | Kade Williams">
+  <Nav current="software-development" />
+
+  <main class="page-wrapper">
+
+    <div class="page-header">
+      <a href="/" class="back-link">← BACK</a>
+      <div class="page-eyebrow font-vt">// PROFESSIONAL WORK</div>
+      <h1 class="page-title">SOFTWARE<br /><span class="outline">DEVELOPMENT</span></h1>
+      <p class="page-desc">
+        Enterprise-scale internal tooling, data platforms, and automation systems
+        built to solve real operational problems.
+      </p>
+      <div class="tech-row">
+        <span class="tech-label font-vt">CORE STACK//</span>
+        <div class="tech-chips">
+          {tech.map(t => <span class="chip chip--accent">{t}</span>)}
         </div>
-      </nav>
+      </div>
     </div>
 
-    <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
-  </body>
-</html>
+    <section class="projects-section">
+      <div class="section-label font-vt">◈ PROJECTS</div>
+      <div class="projects-list">
+        {projects.map((p, i) => (
+          <div class="project-wrapper" style={`animation-delay: ${i * 100}ms`}>
+            <Project
+              title={p.title}
+              problem={p.problem}
+              solution={p.solution}
+              header={p.header}
+              desc={p.desc}
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="font-vt footer-copy">KW © {new Date().getFullYear()}</span>
+      <div class="footer-links">
+        <a href="https://github.com/KadeWilliams" target="_blank" rel="noopener" class="footer-link">GITHUB ↗</a>
+        <a href="mailto:kadewilliams0@gmail.com" class="footer-link">EMAIL ↗</a>
+      </div>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  .page-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 2rem 3rem;
+  }
+
+  .font-vt { font-family: var(--font-vt) !important; }
+
+  .page-header {
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border-color);
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--dim);
+    margin-bottom: 1.5rem;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.15s;
+  }
+
+  .back-link:hover { color: var(--blue); border-color: var(--blue); }
+
+  .page-eyebrow {
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    color: var(--blue);
+    margin-bottom: 0.5rem;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.9;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+  }
+
+  .outline {
+    -webkit-text-stroke: 2px var(--white);
+    color: transparent;
+  }
+
+  .page-desc { color: var(--dim); max-width: 520px; margin-bottom: 2rem; }
+
+  .tech-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .tech-label {
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    color: var(--dim);
+    flex-shrink: 0;
+  }
+
+  .tech-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .chip {
+    font-family: var(--font-vt);
+    font-size: 1rem;
+    padding: 2px 10px;
+    border: 1px solid var(--border-color);
+    color: var(--dim);
+    transition: all 0.15s;
+  }
+
+  .chip--accent {
+    border-color: rgba(0, 207, 255, 0.4);
+    color: var(--blue);
+  }
+
+  .section-label {
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    color: var(--dim);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-color);
+  }
+
+  .projects-list { display: flex; flex-direction: column; gap: 1.25rem; }
+
+  .project-wrapper { animation: fadeUp 0.5s ease both; }
+
+  .footer { border-top: 1px solid var(--border-color); margin-top: 4rem; }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-family: var(--font-vt);
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: var(--dim);
+  }
+
+  .footer-links { display: flex; gap: 1.5rem; }
+
+  .footer-link {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--dim);
+    transition: color 0.15s;
+  }
+
+  .footer-link:hover { color: var(--blue); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>

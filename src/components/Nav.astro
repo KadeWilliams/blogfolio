@@ -1,0 +1,169 @@
+---
+interface Props {
+  current?: string;
+}
+const { current = '' } = Astro.props;
+
+const links = [
+  { href: '/',                     label: 'HOME',     id: 'home' },
+  { href: '/software-development', label: 'WORK',     id: 'software-development' },
+  { href: '/personal-projects',    label: 'PROJECTS', id: 'personal-projects' },
+];
+---
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <span class="nav-logo-bracket">[</span>KW<span class="nav-logo-bracket">]</span>
+    </a>
+
+    <nav class="nav-links" id="nav-links">
+      {links.map(link => (
+        <a
+          href={link.href}
+          class={`nav-link ${current === link.id ? 'nav-link--active' : ''}`}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a href="mailto:kadewilliams0@gmail.com" class="nav-cta">
+        CONTACT ↗
+      </a>
+    </nav>
+
+    <button class="nav-hamburger" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const links = document.getElementById('nav-links');
+  toggle?.addEventListener('click', () => {
+    links?.classList.toggle('nav-links--open');
+    toggle.classList.toggle('nav-hamburger--open');
+  });
+</script>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(8, 8, 8, 0.92);
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+
+  .nav-logo-bracket { color: var(--blue); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .nav-link {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 0.4rem 0.85rem;
+    color: var(--dim);
+    border: 1px solid transparent;
+    transition: all 0.15s;
+  }
+
+  .nav-link:hover {
+    color: var(--white);
+    border-color: var(--border-color);
+  }
+
+  .nav-link--active {
+    color: var(--blue);
+    border-color: var(--blue);
+  }
+
+  .nav-cta {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 0.4rem 0.85rem;
+    color: var(--blue);
+    border: 1px solid var(--blue);
+    margin-left: 0.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.15s;
+  }
+
+  .nav-cta:hover {
+    background: var(--blue);
+    color: var(--bg);
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 rgba(0,207,255,0.25);
+  }
+
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--white);
+    transition: all 0.2s;
+  }
+
+  .nav-hamburger--open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger--open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger--open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (max-width: 640px) {
+    .nav-hamburger { display: flex; }
+
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 64px;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      gap: 0.5rem;
+    }
+
+    .nav-links--open { display: flex; }
+    .nav-cta { margin-left: 0; margin-top: 0.5rem; }
+  }
+</style>
